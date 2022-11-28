@@ -29,3 +29,4 @@ jobs:
         with:
           project-keys: EX,IN,BV
           repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          jira-domain: bondvet.atlassian.net

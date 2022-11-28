@@ -57,12 +57,14 @@ async function addIssueLink(issueKey: string): Promise<void> {
   }
 
   console.log(`adding link to ${issueKey} to PR #${prNumber}`);
+  const domain = core.getInput("jira-domain", { required: false });
+  const issueLink = domain ? `https://${domain}/browse/${issueKey}` : issueKey;
 
   await client.rest.pulls.update({
     owner: github.context.repo.owner,
     repo: github.context.repo.repo,
     pull_number: prNumber,
-    body: `Jira: ${issueKey}\n\n${body}`,
+    body: `Jira: ${issueLink}\n\n${body}`,
   });
 }
 
@@ -87,18 +89,12 @@ async function run() {
     if (issue) {
       console.log(`found issue: ${issue}. project key: ${projectKey}`);
 
-      addIssueLink(issue);
+      await addIssueLink(issue);
       return;
     }
   }
 
   console.log(`no issue key found for project keys ${projectKeys.join(", ")}`);
-
-  const payload = JSON.stringify(
-    github.context.payload.pull_request,
-    undefined,
-    2
-  );
 }
 
 run();

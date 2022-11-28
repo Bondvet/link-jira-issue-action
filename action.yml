@@ -10,3 +10,6 @@ inputs:
   repo-token:
     description: 'the `GITHUB_TOKEN`secret'
     required: true
+  jira-domain:
+    description: domain of your Jira instance
+    required: false
