@@ -58,7 +58,9 @@ async function addIssueLink(issueKey: string): Promise<void> {
 
   console.log(`adding link to ${issueKey} to PR #${prNumber}`);
   const domain = core.getInput("jira-domain", { required: false });
-  const issueLink = domain ? `https://${domain}/browse/${issueKey}` : issueKey;
+  const issueLink = domain
+    ? `[${issueKey}](https://${domain}/browse/${issueKey})`
+    : issueKey;
 
   await client.rest.pulls.update({
     owner: github.context.repo.owner,
