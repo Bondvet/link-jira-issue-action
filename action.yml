@@ -2,8 +2,14 @@ name: 'Link Jira issue'
 description: makes sure that a link to the Jira issue is part of the PR description
 runs:
   using: 'node16'
-  main: 'lib/main.js'
+  main: 'dist/main.js'
 inputs:
   project-keys:
     description: comma separated list of Jira project keys to look for in the branch name
     required: true
+  repo-token:
+    description: 'the `GITHUB_TOKEN`secret'
+    required: true
+  jira-domain:
+    description: domain of your Jira instance
+    required: false
