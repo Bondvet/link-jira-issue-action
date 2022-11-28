@@ -7,6 +7,6 @@ jobs:
     steps:
       - name: Test
         id: test
-        uses: Bondvet/link-jira-issue-action
+        uses: Bondvet/link-jira-issue-action@main
         with:
           project-keys: EX,IN,BV
