@@ -1,9 +1,9 @@
-  name:
-    description: makes sure that a link to the Jira issue is part of the PR description
-  runs:
-    using: 'node16'
-    main: 'index.js'
+name: 'Link Jira issue'
+description: makes sure that a link to the Jira issue is part of the PR description
+runs:
+  using: 'node16'
+  main: 'index.js'
 inputs:
-    project-keys:
-        description: comma separated list of Jira project keys to look for in the branch name
-        requried: true
+  project-keys:
+    description: comma separated list of Jira project keys to look for in the branch name
+    required: true
