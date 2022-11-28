@@ -7,3 +7,6 @@ inputs:
   project-keys:
     description: comma separated list of Jira project keys to look for in the branch name
     required: true
+  repo-token:
+    description: 'the `GITHUB_TOKEN`secret'
+    required: true

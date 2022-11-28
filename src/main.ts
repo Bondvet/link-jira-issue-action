@@ -49,15 +49,21 @@ async function addIssueLink(issueKey: string): Promise<void> {
     pull_number: prNumber,
   });
 
-  const currentDescription =
-    (pullRequest as unknown as { description?: string }).description ?? "";
+  const body = pullRequest.body ?? "";
 
-  if (currentDescription.includes(issueKey)) {
+  if (body.includes(issueKey)) {
     console.log(`pr #${prNumber} already contains link to ${issueKey}`);
     return;
   }
 
-  console.log(JSON.stringify(pullRequest, null, 2));
+  console.log(`adding link to ${issueKey} to PR #${prNumber}`);
+
+  await client.rest.pulls.update({
+    owner: github.context.repo.owner,
+    repo: github.context.repo.repo,
+    pull_number: prNumber,
+    body: `Jira: ${issueKey}\n\n${body}`,
+  });
 }
 
 async function run() {
@@ -93,9 +99,6 @@ async function run() {
     undefined,
     2
   );
-  console.log(`the event payload: ${payload}`);
-
-  console.log(`project key: ${JSON.stringify(projectKeys, undefined, 2)}`);
 }
 
 run();
