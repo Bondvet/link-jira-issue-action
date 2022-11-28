@@ -84,7 +84,9 @@ function addIssueLink(issueKey) {
         }
         console.log(`adding link to ${issueKey} to PR #${prNumber}`);
         const domain = core.getInput("jira-domain", { required: false });
-        const issueLink = domain ? `https://${domain}/browse/${issueKey}` : issueKey;
+        const issueLink = domain
+            ? `[${issueKey}](https://${domain}/browse/${issueKey})`
+            : issueKey;
         yield client.rest.pulls.update({
             owner: github.context.repo.owner,
             repo: github.context.repo.repo,
